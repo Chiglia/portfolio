@@ -1,0 +1,24 @@
+version: "3.8"
+
+services: 
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      - ${ENV_PORT}:${ENV_PORT}
+    volumes: 
+      - .:/test
+      - '/test/node_modules'
+    depends_on: 
+      - ${ENV_HOST}
+  
+  mysql_server:
+    image: mysql:8.0
+    environment: 
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD
+
+    
